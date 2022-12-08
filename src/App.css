@@ -1,38 +1,219 @@
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,
+html {
+  font-family: sans-serif;
+  background-color: rgb(202, 202, 202);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+body {
+  min-height: 100%;
+}
+
+.grass {
+  color: white;
+  background-color: #9bcc50;
+}
+
+.poison {
+  color: white;
+  background-color: #b97fc9;
+}
+
+.fire {
+  color: white;
+  background-color: #fd7d24;
+}
+
+.water {
+  color: white;
+  background-color: #4592c4;
+}
+
+.flying {
+  background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
+  background-color: #3dc7ef;
+  color: #212121;
+}
+
+.bug {
+  background-color: #729f3f;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.normal {
+  background-color: #a4acaf;
+  color: #212121;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.electric {
+  background-color: #eed535;
+  color: #212121;
 }
+
+.ground {
+  background-color: #f7de3f;
+  color: #212121;
+}
+
+.fairy {
+  background-color: #fdb9e9;
+  color: #212121;
+}
+
+.fighting {
+  background-color: #d56723;
+  color: white;
+}
+
+.rock {
+  background-color: #a38c21;
+  color: white;
+}
+
+.steel {
+  background-color: #9eb7b8;
+  color: #212121;
+}
+
+.ice {
+  background-color: #51c4e7;
+  color: #212121;
+}
+
+.ghost {
+  background-color: #7b62a3;
+  color: white;
+}
+
+.dragon {
+  background: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
+  background-color: #53a4cf;
+  color: white;
+}
+
+.psychic {
+  background-color: #f366b9;
+  color: white;
+}
+
+.psychic {
+  background-color: #f366b9;
+  color: white;
+}
+
+.App {
+  width: 100%;
+}
+.App header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #e3350d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.App .pokemon-container {
+  width: 100%;
+  display: grid;
+  grid-template: auto auto/repeat(3, 1fr);
+  gap: clamp(10px, 4vw, 70px);
+  padding: 20px;
+}
+.App .pokemon-container .pokemon {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px 20px 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.App .pokemon-container .pokemon:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -6px;
+  border-radius: 10px;
+  background-image: linear-gradient(134deg, gold, orange);
+}
+.App .pokemon-container .pokemon:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 10px;
+  background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(37, 145, 251, 0.98) 0.1%, rgb(0, 7, 128) 99.8%);
+}
+.App .pokemon-container .pokemon .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-shadow: 0px 0px 2px black, 0px 0px 0px black;
+  color: white;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.App .pokemon-container .pokemon .id {
+  font-size: clamp(12px, 4vw, 14px);
+}
+.App .pokemon-container .pokemon .name {
+  text-transform: capitalize;
+  font-size: clamp(14px, 4vw, 20px);
+}
+.App .pokemon-container .pokemon .image {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  position: relative;
+  aspect-ratio: 1;
+}
+.App .pokemon-container .pokemon .image:hover .front {
+  opacity: 0;
+}
+.App .pokemon-container .pokemon .image:hover .back {
+  opacity: 1;
+}
+.App .pokemon-container .pokemon .image img {
+  position: absolute;
+  aspect-ratio: 1;
+  width: 100%;
+  transition: opacity 0.3s;
+}
+.App .pokemon-container .pokemon .image img.back {
+  opacity: 0;
+}
+.App .pokemon-container .pokemon .types span {
+  text-transform: uppercase;
+  font-size: clamp(10px, 2vw, 12px);
+  line-height: 1;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  padding: 4px 16px 4px;
+  margin-right: 8px;
+}
+
+/*# sourceMappingURL=App.css.map */
