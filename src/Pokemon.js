@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 export default function Pokemon(props) {
   return (
     <div className={`pokemon `}>
@@ -21,7 +20,7 @@ export default function Pokemon(props) {
         </div>
         <div className="types">
           {props.types.map((t) => (
-            <span key={nanoid()} className={t.type.name}>
+            <span key={t.type.name} className={t.type.name}>
               {t.type.name}
             </span>
           ))}
