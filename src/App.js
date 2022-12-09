@@ -1,7 +1,9 @@
+// https://sg.portal-pokemon.com/play/pokedex/001
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./Header";
 import Pokemon from "./Pokemon";
+import { nanoid } from "nanoid";
 
 export default function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -9,15 +11,19 @@ export default function App() {
   const [search, setSearch] = useState("");
 
   function fetchData() {
+    console.log(pokemon);
+    console.log("begin fetch");
     let allPokemon = [];
-    const POKE_COUNT = 50;
+    const POKE_COUNT = 9;
 
     for (let i = 1; i < POKE_COUNT + 1; i++) {
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
         .then((res) => res.json())
         .then((data) => allPokemon.push(data));
     }
+    console.log("set pokemon");
     setPokemon(allPokemon);
+    console.log(pokemon);
   }
 
   // async function fetchData(id) {
@@ -48,23 +54,17 @@ export default function App() {
 
   useEffect(() => {
     // Filter out available exercise based on search state
-    const filteredData = pokemon.filter((d) => d.name.startsWith(search));
+    const filteredData = pokemon.filter((d) => d.name.includes(search));
 
-    setFilteredPokemon((prev) => (search !== 0 ? filteredData : pokemon));
-  }, [search, pokemon]);
+    setFilteredPokemon((prev) => (search !== "" ? filteredData : pokemon));
+  }, [search]);
 
   function handleChange(event) {
-    let timeout;
     // Get input value
     const { value } = event.target;
 
-    // Clear the timeout
-    clearTimeout(timeout);
-
-    timeout = setTimeout(function () {
-      // Store into search state
-      setSearch((prev) => value.toLowerCase());
-    }, 0);
+    // Store into search state
+    setSearch((prev) => value.toLowerCase());
   }
 
   return (
@@ -73,10 +73,12 @@ export default function App() {
       <div className="pokemon-container">
         {filteredPokemon
           ? filteredPokemon.map((p) => {
-              return <Pokemon key={p.id} {...p} />;
+              console.log("show filtered");
+              return <Pokemon key={nanoid()} {...p} />;
             })
           : pokemon.map((p) => {
-              return <Pokemon key={p.id} {...p} />;
+              console.log("show pokemon");
+              return <Pokemon key={nanoid()} {...p} />;
             })}
       </div>
     </div>
